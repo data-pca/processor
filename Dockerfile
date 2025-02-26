@@ -1,7 +1,5 @@
 FROM docker.io/golang:1.22.7-alpine as build
 
-ARG ACCESS_TOKEN
-
 WORKDIR /app
 
 COPY ./go.mod ./go.sum /app/
