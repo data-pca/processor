@@ -2,12 +2,11 @@ package delivery
 
 import (
 	"github.com/gofiber/fiber/v3"
-	"processor/internal/authorization/delivery/handlers"
+	"processor/internal/authorization"
 )
 
-func MatchRoutes(apiRouter fiber.Router) {
+func MatchRoutes(apiRouter fiber.Router, h authorization.Handler) {
 	r := apiRouter.Group("authorization")
-	h := handlers.New(nil)
 
 	r.Get("/", h.CheckAuth())
 }
