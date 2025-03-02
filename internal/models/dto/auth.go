@@ -1,10 +1,13 @@
 package dto
 
-type GetAuthRequest struct {
-	Login    string `json:"login"`
+type SignInRequest struct {
+	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
-type GetAuthResponse struct {
-	Token string `json:"token"`
+//
+
+type SignUpRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }

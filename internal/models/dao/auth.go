@@ -1,10 +1,26 @@
 package dao
 
-type GetAuthRequest struct {
-	Login    string `db:"login"`
-	Password string `db:"password"`
-}
+type (
+	SignInRequest struct {
+		Username string
+		Password string
+	}
 
-type GetAuthResponse struct {
-	Token string `db:"token"`
-}
+	SignInResponse struct {
+		ID       int    `db:"id"`
+		Password string `db:"password"`
+	}
+)
+
+//
+
+type (
+	SignUpRequest struct {
+		Username string
+		Password string
+	}
+
+	SignUpResponse struct {
+		UserID int `db:"id"`
+	}
+)
