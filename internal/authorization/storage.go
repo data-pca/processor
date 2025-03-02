@@ -6,5 +6,6 @@ import (
 )
 
 type Storage interface {
-	CheckAuth(ctx context.Context, params dao.GetAuthRequest) (*dao.GetAuthResponse, error)
+	SignIn(ctx context.Context, params dao.SignInRequest) (*dao.SignInResponse, error)
+	SignUp(ctx context.Context, params dao.SignUpRequest) (*dao.SignUpResponse, error)
 }

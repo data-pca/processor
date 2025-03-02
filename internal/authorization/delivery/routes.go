@@ -8,5 +8,6 @@ import (
 func MatchRoutes(apiRouter fiber.Router, h authorization.Handler) {
 	r := apiRouter.Group("authorization")
 
-	r.Get("/", h.CheckAuth())
+	r.Post("/sign-in", h.SignIn())
+	r.Post("/sign-up", h.SignUp())
 }

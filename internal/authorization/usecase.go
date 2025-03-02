@@ -3,8 +3,10 @@ package authorization
 import (
 	"context"
 	"processor/internal/models/dto"
+	"processor/pkg/jwt"
 )
 
 type UseCase interface {
-	CheckAuth(ctx context.Context, params dto.GetAuthRequest) (*dto.GetAuthResponse, error)
+	SignIn(ctx context.Context, params dto.SignInRequest) (*jwt.Tokens, error)
+	SignUp(ctx context.Context, params dto.SignUpRequest) (*jwt.Tokens, error)
 }

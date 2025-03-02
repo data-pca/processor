@@ -2,6 +2,7 @@ package postgres
 
 import (
 	"context"
+	"github.com/dromara/carbon/v2"
 	"github.com/jmoiron/sqlx"
 	"processor/internal/authorization"
 	"processor/internal/models/dao"
@@ -15,12 +16,20 @@ func New(db *sqlx.DB) authorization.Storage {
 	return &database{db: db}
 }
 
-func (d database) CheckAuth(ctx context.Context, params dao.GetAuthRequest) (*dao.GetAuthResponse, error) {
-	var response dao.GetAuthResponse
+func (d database) SignIn(ctx context.Context, params dao.SignInRequest) (*dao.SignInResponse, error) {
+	var response dao.SignInResponse
 
-	query := "SELECT * FROM auth WHERE login = $1 AND password = $2"
+	if err := d.db.GetContext(ctx, queryGetPassword, params.Username); err != nil {
+		return nil, err
+	}
 
-	if err := d.db.GetContext(ctx, &response, query, params.Login, params.Password); err != nil {
+	return &response, nil
+}
+
+func (d database) SignUp(ctx context.Context, params dao.SignUpRequest) (*dao.SignUpResponse, error) {
+	var response dao.SignUpResponse
+
+	if err := d.db.GetContext(ctx, &response, queryInsertUser, carbon.Now(), params.Username, params.Password); err != nil {
 		return nil, err
 	}
 
